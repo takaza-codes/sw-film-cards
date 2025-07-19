@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="flex items-center space-x-2 sm:space-x-8">
         <div>
           <Link href="/">
-            <Image src="/logo.png" alt="Logo" width={90} height={100}></Image>
+            <Image src="/logo.png" alt="Logo" width={90} height={83} />
           </Link>
         </div>
         <NavigationMenu>
