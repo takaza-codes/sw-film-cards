@@ -12,15 +12,10 @@ async function getUser(id: string): Promise<User | null> {
     if (!response.ok) return null;
 
     const user: User = await response.json();
-    if (!user || !user.id) return null;
 
     return user;
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      return null;
-    } else {
-      return notFound();
-    }
+  } catch {
+    return null;
   }
 }
 

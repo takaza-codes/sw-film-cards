@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import CustomButton from "./CustomButton";
 import { User } from "../../types";
 
 type UserInfoProps = {
@@ -44,7 +45,9 @@ export default function UserInfo({ user }: UserInfoProps) {
         </div>
       </div>
       <div className="mt-8 self-center underline text-pink-600">
-        <Link href="/">Back to main</Link>
+        <Link href="/">
+          <CustomButton>Back to main</CustomButton>
+        </Link>
       </div>
     </main>
   );

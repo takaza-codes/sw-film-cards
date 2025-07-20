@@ -19,12 +19,8 @@ export default async function Home() {
     if (users.length === 0) {
       error = "No users found";
     }
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      error = err.message;
-    } else {
-      error = "Unknown error";
-    }
+  } catch (err) {
+    error = (err as Error).message || "Unknown error";
   }
 
   if (error) {

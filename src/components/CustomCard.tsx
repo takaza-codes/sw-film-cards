@@ -13,9 +13,9 @@ import React from "react";
 
 export default function CustomCard({ user }: { user: User }) {
   return (
-    <Card className="w-full max-w-sm shadow-l shadow-stone-400">
-      <CardHeader className="justify-center">
-        <CardTitle className="justify-self-center">{user.name}</CardTitle>
+    <Card className="w-full max-w-sm shadow-lg shadow-stone-400">
+      <CardHeader className="text-center">
+        <CardTitle>{user.name}</CardTitle>
         <CardDescription className="justify-self-center">
           {user.email}
         </CardDescription>
