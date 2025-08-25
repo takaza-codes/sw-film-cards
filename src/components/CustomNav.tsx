@@ -23,7 +23,7 @@ export default function Navbar() {
               <NavigationMenuLink asChild className="text-xl sm:text-2xl">
                 <Link
                   href="/"
-                  className="text-stone-700 hover:text-pink-600 transition-colors">
+                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
                   Main
                 </Link>
               </NavigationMenuLink>
@@ -31,9 +31,18 @@ export default function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuLink asChild className="text-xl sm:text-2xl">
                 <Link
+                  href="/new-entry"
+                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
+                  Create a new entry
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className="text-xl sm:text-2xl">
+                <Link
                   href="/about"
-                  className="text-stone-700 hover:text-pink-600 transition-colors">
-                  Contacts
+                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
+                  Contact us
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>

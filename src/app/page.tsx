@@ -1,12 +1,12 @@
-import { User } from "../../types";
+import { Film } from "../../types";
 import CustomCard from "@/components/CustomCard";
 
 export default async function Home() {
-  let users: User[] = [];
+  let films: Film[] = [];
   let error: string | null = null;
 
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+    const response = await fetch("https://swapi.info/api/films", {
       cache: "no-store",
     });
 
@@ -14,10 +14,13 @@ export default async function Home() {
       throw new Error(`Request error: ${response.status}`);
     }
 
-    users = await response.json();
+    films = (await response.json()).map((film: Film, idx: number) => ({
+      ...film,
+      id: (idx + 1).toString(),
+    }));
 
-    if (users.length === 0) {
-      error = "No users found";
+    if (films.length === 0) {
+      error = "No films found";
     }
   } catch (err) {
     error = (err as Error).message || "Unknown error";
@@ -35,11 +38,18 @@ export default async function Home() {
   return (
     <main className="mt-10 mb-10 flex-1 flex flex-wrap flex-col content-center gap-6">
       <h1 className="pt-8 pb-8 text-center font-bold text-5xl lg:text-6xl">
-        Meet our users!
+        We proudly present our lore!
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {users.map((user) => (
-          <CustomCard key={user.id} user={user} />
+      <p className="text-center text-xl mb-8 px-4">
+        (as provided by{" "}
+        <a href="https://swapi.info/" className="underline">
+          SWAPI
+        </a>
+        )
+      </p>
+      <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
+        {films.map((film) => (
+          <CustomCard key={film.episode_id} film={film} />
         ))}
       </div>
     </main>
