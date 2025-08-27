@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchFilms } from "../filmsData";
 
 interface CardsState {
   cards: any[];
-  likedIds: string[];
+  liked: string[];
   loading: boolean;
   error: null | string;
   data: string[];
@@ -10,7 +11,7 @@ interface CardsState {
 
 const initialState: CardsState = {
   cards: [],
-  likedIds: [],
+  liked: [],
   loading: false,
   error: null,
   data: [],
@@ -31,12 +32,27 @@ const cardsSlice = createSlice({
     },
     toggleLike(state, action: PayloadAction<string>) {
       const id = action.payload;
-      if (state.likedIds.includes(id)) {
-        state.likedIds = state.likedIds.filter((fid) => fid !== id);
+      if (state.liked.includes(id)) {
+        state.liked = state.liked.filter((fid) => fid !== id);
       } else {
-        state.likedIds.push(id);
+        state.liked.push(id);
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchFilms.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchFilms.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      })
+      .addCase(fetchFilms.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to fetch films";
+      });
   },
 });
 

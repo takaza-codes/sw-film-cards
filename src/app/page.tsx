@@ -1,30 +1,20 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Film } from "../../types";
+import { fetchFilms } from "./store/filmsData";
 import CustomCard from "@/components/CustomCard";
+import CustomButton from "@/components/CustomButton";
+import { AppDispatch } from "./store/store";
 
-export default async function Home() {
-  let films: Film[] = [];
-  let error: string | null = null;
+export default function Home() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { liked, data, error } = useSelector((state: any) => state.cards);
+  const [showLikes, setShowLikes] = useState(false);
 
-  try {
-    const response = await fetch("https://swapi.info/api/films", {
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      throw new Error(`Request error: ${response.status}`);
-    }
-
-    films = (await response.json()).map((film: Film, idx: number) => ({
-      ...film,
-      id: (idx + 1).toString(),
-    }));
-
-    if (films.length === 0) {
-      error = "No films found";
-    }
-  } catch (err) {
-    error = (err as Error).message || "Unknown error";
-  }
+  useEffect(() => {
+    dispatch(fetchFilms());
+  }, [dispatch]);
 
   if (error) {
     return (
@@ -34,6 +24,12 @@ export default async function Home() {
       </main>
     );
   }
+
+  const toggleShowLikes = () => {
+    setShowLikes(!showLikes);
+  };
+
+  const films: Film[] = showLikes ? liked : data;
 
   return (
     <main className="mt-10 mb-10 flex-1 flex flex-wrap flex-col content-center gap-6">
@@ -47,11 +43,23 @@ export default async function Home() {
         </a>
         )
       </p>
-
+      <CustomButton
+        onClick={toggleShowLikes}
+        className="custom-button w-30 h-15 mr-40 text-2xl self-end">
+        {showLikes ? "All" : "Likes"}
+      </CustomButton>
       <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
-        {films.map((film) => (
-          <CustomCard key={film.episode_id} film={film} />
-        ))}
+        {films.length === 0 ? (
+          <p className="text-center text-xl mt-10 mb-10 text-gray-500">
+            {showLikes
+              ? "You don't have any liked films yet."
+              : "No films available."}
+          </p>
+        ) : (
+          films.map((film: Film) => (
+            <CustomCard key={film.episode_id} film={film} />
+          ))
+        )}
       </div>
     </main>
   );
