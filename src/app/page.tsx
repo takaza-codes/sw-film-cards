@@ -47,6 +47,7 @@ export default async function Home() {
         </a>
         )
       </p>
+
       <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
         {films.map((film) => (
           <CustomCard key={film.episode_id} film={film} />
