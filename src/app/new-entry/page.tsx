@@ -62,7 +62,7 @@ export default function AddFilmForm() {
       </div>
 
       <div>
-        <label>Opening Crawl:</label>
+        <label>Opening:</label>
         <textarea
           {...register("opening_crawl", {
             required: "Opening crawl is required",
