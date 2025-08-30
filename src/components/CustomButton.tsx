@@ -7,7 +7,7 @@ export default function CustomButton({
   className,
 }: {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }) {
   return (

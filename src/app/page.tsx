@@ -9,7 +9,7 @@ import { AppDispatch } from "./store/store";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
-  const { liked, data, error } = useSelector((state: any) => state.cards);
+  const { cards, liked, error } = useSelector((state: any) => state.cards);
   const [showLikes, setShowLikes] = useState(false);
 
   useEffect(() => {
@@ -29,7 +29,9 @@ export default function Home() {
     setShowLikes(!showLikes);
   };
 
-  const films: Film[] = showLikes ? liked : data;
+  const films = showLikes
+    ? cards.filter((film: Film) => liked.includes(film.id))
+    : cards;
 
   return (
     <main className="mt-10 mb-10 flex-1 flex flex-wrap flex-col content-center gap-6">
@@ -45,8 +47,8 @@ export default function Home() {
       </p>
       <CustomButton
         onClick={toggleShowLikes}
-        className="custom-button w-30 h-15 mr-40 text-2xl self-end">
-        {showLikes ? "All" : "Likes"}
+        className="custom-button w-35 h-12 mr-40 text-2xl self-end">
+        {showLikes ? "Show all" : "Show liked"}
       </CustomButton>
       <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
         {films.length === 0 ? (
@@ -56,9 +58,7 @@ export default function Home() {
               : "No films available."}
           </p>
         ) : (
-          films.map((film: Film) => (
-            <CustomCard key={film.episode_id} film={film} />
-          ))
+          films.map((film: Film) => <CustomCard key={film.id} film={film} />)
         )}
       </div>
     </main>
