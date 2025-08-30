@@ -38,10 +38,6 @@ export default function FilmInfo({ film }: FilmInfoProps) {
           <span className="font-bold">Opening: </span>
           {opening_crawl}
         </div>
-        {/* <div>
-          <span className="font-bold">Company: </span>
-          {company.name}
-        </div> */}
       </div>
       <div className="mt-8 self-center underline text-pink-600">
         <Link href="/">

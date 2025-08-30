@@ -120,3 +120,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.custom-button {
+  @apply bg-stone-300 shadow-md shadow-violet-300/50 hover:bg-violet-800 hover:text-white hover:border-transparent text-stone-800 border border-stone-600 py-4 px-6 rounded;
+}
+
+.action-button {
+  @apply w-7 h-7 p-0 bg-transparent border-0 shadow-none hover:bg-transparent cursor-pointer;
+}
