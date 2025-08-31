@@ -53,6 +53,9 @@ const cardsSlice = createSlice({
   name: "cards",
   initialState: { ...initialState, ...loadFromSessionStorage() },
   reducers: {
+    loadSavedState(state, action: PayloadAction<Partial<CardsState>>) {
+      return { ...state, ...action.payload };
+    },
     cardAdded(state, action: PayloadAction<Film>) {
       state.cards.push(action.payload);
       saveToSessionStorage(state);
@@ -98,7 +101,7 @@ const cardsSlice = createSlice({
           );
 
           const userCards = state.cards.filter(
-            (card) => !action.payload.some((apiCard) => apiCard.id === card.id)
+            (card) => Number(card.id) > 1000
           );
 
           state.cards = [...apiCards, ...userCards];
@@ -114,5 +117,6 @@ const cardsSlice = createSlice({
   },
 });
 
-export const { cardAdded, cardDeleted, toggleLike } = cardsSlice.actions;
+export const { loadSavedState, cardAdded, cardDeleted, toggleLike } =
+  cardsSlice.actions;
 export default cardsSlice.reducer;
