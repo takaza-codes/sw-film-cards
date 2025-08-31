@@ -34,7 +34,7 @@ export default function Home() {
     : cards;
 
   return (
-    <main className="mt-10 mb-10 flex-1 flex flex-wrap flex-col content-center gap-6">
+    <main className="m-10 flex-1 flex flex-wrap flex-col content-center gap-6">
       <h1 className="pt-8 pb-8 text-center font-bold text-5xl lg:text-6xl">
         We proudly present our lore!
       </h1>

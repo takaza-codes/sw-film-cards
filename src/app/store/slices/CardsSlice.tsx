@@ -7,6 +7,8 @@ interface CardsState {
   liked: string[];
   loading: boolean;
   error: null | string;
+  deletedIds: string[];
+  isInitialized: boolean;
 }
 
 const initialState: CardsState = {
@@ -14,17 +16,59 @@ const initialState: CardsState = {
   liked: [],
   loading: false,
   error: null,
+  deletedIds: [],
+  isInitialized: false,
+};
+
+const loadFromSessionStorage = (): Partial<CardsState> => {
+  if (typeof window === "undefined") return {};
+
+  try {
+    const saved = sessionStorage.getItem("cardsState");
+    return saved ? JSON.parse(saved) : {};
+  } catch {
+    return {};
+  }
+};
+
+const saveToSessionStorage = (state: CardsState) => {
+  if (typeof window === "undefined") return;
+
+  try {
+    sessionStorage.setItem(
+      "cardsState",
+      JSON.stringify({
+        cards: state.cards,
+        liked: state.liked,
+        deletedIds: state.deletedIds,
+        isInitialized: state.isInitialized,
+      })
+    );
+  } catch {
+    return;
+  }
 };
 
 const cardsSlice = createSlice({
   name: "cards",
-  initialState,
+  initialState: { ...initialState, ...loadFromSessionStorage() },
   reducers: {
     cardAdded(state, action: PayloadAction<Film>) {
       state.cards.push(action.payload);
+      saveToSessionStorage(state);
     },
     cardDeleted(state, action: PayloadAction<string>) {
-      state.cards = state.cards.filter((film) => film.id !== action.payload);
+      const cardId = action.payload;
+
+      state.cards = state.cards.filter((film) => film.id !== cardId);
+
+      if (!state.deletedIds.includes(cardId)) {
+        state.deletedIds.push(cardId);
+      }
+
+      state.liked = state.liked.filter((id) => id !== cardId);
+
+      saveToSessionStorage(state);
     },
     toggleLike(state, action: PayloadAction<string>) {
       const id = action.payload;
@@ -33,6 +77,7 @@ const cardsSlice = createSlice({
       } else {
         state.liked.push(id);
       }
+      saveToSessionStorage(state);
     },
   },
   extraReducers: (builder) => {
@@ -43,11 +88,28 @@ const cardsSlice = createSlice({
       })
       .addCase(fetchFilms.fulfilled, (state, action: PayloadAction<Film[]>) => {
         state.loading = false;
-        state.cards = action.payload;
+
+        if (!state.isInitialized) {
+          state.cards = action.payload;
+          state.isInitialized = true;
+        } else {
+          const apiCards = action.payload.filter(
+            (film) => !state.deletedIds.includes(film.id)
+          );
+
+          const userCards = state.cards.filter(
+            (card) => !action.payload.some((apiCard) => apiCard.id === card.id)
+          );
+
+          state.cards = [...apiCards, ...userCards];
+        }
+
+        saveToSessionStorage(state);
       })
       .addCase(fetchFilms.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch films";
+        saveToSessionStorage(state);
       });
   },
 });

@@ -33,7 +33,7 @@ export default function CustomCard({ film }: { film: Film }) {
 
   return (
     <Card
-      className="w-full max-w-xs p-6 shadow-lg shadow-stone-400 cursor-pointer"
+      className="w-full max-w-sm min-h-full p-6 shadow-lg shadow-stone-400 cursor-pointer"
       onClick={handleCardClick}>
       <CardAction className="w-full flex flex-row justify-between">
         <CustomButton

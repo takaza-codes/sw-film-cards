@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { cardAdded } from "../store/slices/CardsSlice";
@@ -22,12 +23,15 @@ export default function AddFilmForm() {
   } = useForm<NewFilmInput>();
 
   const onSubmit = (data: NewFilmInput) => {
-    const maxId = films.length
-      ? Math.max(...films.map((film: Film) => Number(film.id)))
-      : 0;
+    const userFilms = films.filter((film) => Number(film.id) > 1000);
+    const nextUserId =
+      userFilms.length > 0
+        ? Math.max(...userFilms.map((film) => Number(film.id))) + 1
+        : 1001;
 
     const newFilm: Film = {
-      id: (maxId + 1).toString(),
+      id: nextUserId.toString(),
+      image: "/logo.png",
       ...data,
     };
 
@@ -45,7 +49,7 @@ export default function AddFilmForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="mx-auto grid grid-cols-[30% 1fr] gap-4 text-2xl max-w-2xl p-4">
+        className="mx-auto grid grid-cols-[30% 1fr] gap-4 align-start text-2xl max-w-2xl p-4">
         <label>Title:</label>
         <input
           {...register("title", { required: "Title is required" })}
@@ -101,9 +105,14 @@ export default function AddFilmForm() {
 
         <CustomButton
           type="submit"
-          className="custom-button col-start-1 col-end-3 justify-self-center mt-4">
+          className="custom-button mt-4 col-start-1 col-end-3 justify-self-center">
           Add film
         </CustomButton>
+        <Link
+          href="/"
+          className="col-start-1 col-end-3 justify-self-center mt-8 text-xl underline text-teal-800">
+          Back to main
+        </Link>
       </form>
     </main>
   );
