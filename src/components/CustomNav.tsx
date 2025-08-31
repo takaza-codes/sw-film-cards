@@ -14,13 +14,13 @@ export default function Navbar() {
       <div className="flex items-center space-x-2 sm:space-x-8">
         <div>
           <Link href="/">
-            <Image src="/logo.png" alt="Logo" width={90} height={83} />
+            <Image src="/logo.png" alt="Logo" width={70} height={80} />
           </Link>
         </div>
         <NavigationMenu>
           <NavigationMenuList className="flex">
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-xl sm:text-2xl">
+              <NavigationMenuLink asChild className="text-lg sm:text-xl">
                 <Link
                   href="/"
                   className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
@@ -29,7 +29,7 @@ export default function Navbar() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-xl sm:text-2xl">
+              <NavigationMenuLink asChild className="text-lg sm:text-xl">
                 <Link
                   href="/new-entry"
                   className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
@@ -38,7 +38,7 @@ export default function Navbar() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-xl sm:text-2xl">
+              <NavigationMenuLink asChild className="text-lg sm:text-xl">
                 <Link
                   href="/about"
                   className="text-stone-800 font-bold hover:text-violet-600 transition-colors">

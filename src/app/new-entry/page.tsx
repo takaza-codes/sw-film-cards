@@ -49,7 +49,7 @@ export default function AddFilmForm() {
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
-        className="mx-auto grid grid-cols-[30% 1fr] gap-4 align-start text-2xl max-w-2xl p-4">
+        className="mx-auto grid grid-cols-[30% 1fr] gap-4 align-start text-xl max-w-2xl p-4">
         <label>Title:</label>
         <input
           {...register("title", { required: "Title is required" })}
@@ -110,7 +110,7 @@ export default function AddFilmForm() {
         </CustomButton>
         <Link
           href="/"
-          className="col-start-1 col-end-3 justify-self-center mt-8 text-xl underline text-teal-800">
+          className="col-start-1 col-end-3 justify-self-center my-8 text-xl underline text-teal-800">
           Back to main
         </Link>
       </form>

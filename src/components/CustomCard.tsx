@@ -33,7 +33,7 @@ export default function CustomCard({ film }: { film: Film }) {
 
   return (
     <Card
-      className="w-full max-w-sm min-h-full p-6 shadow-lg shadow-stone-400 cursor-pointer"
+      className="w-full max-w-xs min-h-full p-6 gap-2 shadow-lg shadow-stone-400 cursor-pointer"
       onClick={handleCardClick}>
       <CardAction className="w-full flex flex-row justify-between">
         <CustomButton
@@ -65,7 +65,7 @@ export default function CustomCard({ film }: { film: Film }) {
         </CardDescription>
       </CardHeader>
       <CardContent className="self-center">
-        <div className="relative w-65 h-100 mb-4 rounded-md mx-auto overflow-hidden">
+        <div className="relative w-40 h-60 mb-4 rounded-md mx-auto overflow-hidden">
           <Image
             src={film.image || "/logo.png"}
             alt={film.title}

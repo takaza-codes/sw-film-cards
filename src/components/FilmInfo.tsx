@@ -17,7 +17,7 @@ export default function FilmInfo({ film }: FilmInfoProps) {
   return (
     <main className="m-10 flex-1 flex flex-wrap flex-col content-center gap-8 text-stone-700">
       <h3 className="text-3xl font-bold text-center">{title}</h3>
-      <div className="max-w-3xl flex flex-col content-center gap-2 text-2xl text-stone-700">
+      <div className="max-w-3xl flex flex-col content-center gap-2 text-xl text-stone-700">
         <div>
           <span className="font-bold">Title: </span>
           {title}
@@ -39,9 +39,9 @@ export default function FilmInfo({ film }: FilmInfoProps) {
           {opening_crawl}
         </div>
       </div>
-      <div className="mt-8 self-center underline text-pink-600">
+      <div className="mt-8 self-center">
         <Link href="/">
-          <CustomButton>Back to main</CustomButton>
+          <CustomButton className="custom-button">Back to main</CustomButton>
         </Link>
       </div>
     </main>

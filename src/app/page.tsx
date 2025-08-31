@@ -16,17 +16,17 @@ export default function Home() {
   const [showLikes, setShowLikes] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const saved = sessionStorage.getItem("cardsState");
-        if (saved) {
-          const savedState = JSON.parse(saved);
-          dispatch(loadSavedState(savedState));
-        }
-      } catch (error) {
-        console.error("Failed to load saved state:", error);
+    // if (typeof window !== "undefined") {
+    try {
+      const saved = sessionStorage.getItem("cardsState");
+      if (saved) {
+        const savedState = JSON.parse(saved);
+        dispatch(loadSavedState(savedState));
       }
+    } catch (error) {
+      console.error("Failed to load saved state:", error);
     }
+    // }
 
     dispatch(fetchFilms());
   }, [dispatch]);
@@ -50,10 +50,10 @@ export default function Home() {
 
   return (
     <main className="m-10 flex-1 flex flex-wrap flex-col content-center gap-6">
-      <h1 className="pt-8 pb-8 text-center font-bold text-5xl lg:text-6xl">
+      <h1 className="pt-8 pb-8 text-center font-bold text-2xl lg:text-5xl">
         We proudly present our lore!
       </h1>
-      <p className="text-center text-xl mb-8 px-4">
+      <p className="text-center text-sm mb-8 px-4">
         (as provided by{" "}
         <a href="https://swapi.info/" className="underline">
           SWAPI
@@ -62,7 +62,7 @@ export default function Home() {
       </p>
       <CustomButton
         onClick={toggleShowLikes}
-        className="custom-button w-35 h-12 mr-40 text-2xl self-end">
+        className="custom-button w-30 h-10 mr-40 self-end">
         {showLikes ? "Show all" : "Show liked"}
       </CustomButton>
       <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
