@@ -136,3 +136,12 @@
 .error-msg {
   @apply pl-2 col-span-2 text-xl italic text-red-700;
 }
+
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}

@@ -59,8 +59,8 @@ export default function CustomCard({ film }: { film: Film }) {
         </CustomButton>
       </CardAction>
       <CardHeader className="text-xl text-center">
-        <CardTitle>{film.title}</CardTitle>
-        <CardDescription className="justify-self-center">
+        <CardTitle className="truncated-text">{film.title}</CardTitle>
+        <CardDescription className="truncated-text justify-self-center">
           Episode {film.episode_id}
         </CardDescription>
       </CardHeader>
