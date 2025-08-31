@@ -6,9 +6,9 @@ import { toggleLike, cardDeleted } from "../app/store/slices/CardsSlice";
 import { Film } from "../../types";
 import Image from "next/image";
 import CustomButton from "@/components/CustomButton";
-import trashIcon from "@/../public/trash-icon.svg";
-import unlikedIcon from "@/../public/unliked-icon.svg";
-import likedIcon from "@/../public/liked-icon.svg";
+import trashIcon from "@/../public/icons/trash-icon.svg";
+import unlikedIcon from "@/../public/icons/unliked-icon.svg";
+import likedIcon from "@/../public/icons/liked-icon.svg";
 import {
   Card,
   CardContent,
@@ -33,7 +33,7 @@ export default function CustomCard({ film }: { film: Film }) {
 
   return (
     <Card
-      className="w-full max-w-xs p-6 shadow-lg shadow-stone-400 cursor-pointer"
+      className="w-full max-w-sm min-h-full p-6 shadow-lg shadow-stone-400 cursor-pointer"
       onClick={handleCardClick}>
       <CardAction className="w-full flex flex-row justify-between">
         <CustomButton
@@ -59,12 +59,23 @@ export default function CustomCard({ film }: { film: Film }) {
         </CustomButton>
       </CardAction>
       <CardHeader className="text-xl text-center">
-        <CardTitle>{film.title}</CardTitle>
-        <CardDescription className="justify-self-center">
+        <CardTitle className="truncated-text">{film.title}</CardTitle>
+        <CardDescription className="truncated-text justify-self-center">
           Episode {film.episode_id}
         </CardDescription>
       </CardHeader>
       <CardContent className="self-center">
+        <div className="relative w-65 h-100 mb-4 rounded-md mx-auto overflow-hidden">
+          <Image
+            src={film.image || "/logo.png"}
+            alt={film.title}
+            fill
+            style={{ objectFit: "cover" }}
+            className="rounded-md"
+            sizes="200px"
+            priority={false}
+          />
+        </div>
         <div className="text-sm text-stone-800">Director: {film.director}</div>
       </CardContent>
       <CardFooter className="flex-row justify-center">

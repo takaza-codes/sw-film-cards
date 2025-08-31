@@ -122,9 +122,26 @@
 }
 
 .custom-button {
-  @apply bg-stone-300 shadow-md shadow-violet-300/50 hover:bg-violet-800 hover:text-white hover:border-transparent text-stone-800 border border-stone-600 py-4 px-6 rounded;
+  @apply text-xl bg-stone-300 shadow-md shadow-violet-300/50 hover:bg-violet-800 hover:text-white hover:border-transparent text-stone-800 border border-stone-600 py-4 px-6 rounded cursor-pointer;
 }
 
 .action-button {
   @apply w-7 h-7 p-0 bg-transparent border-0 shadow-none hover:bg-transparent cursor-pointer;
+}
+
+.form-input {
+  @apply bg-stone-50 dark:bg-stone-800 border border-stone-300 dark:border-stone-600 text-stone-900 dark:text-stone-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 focus:border-violet-500 rounded-md shadow-sm;
+}
+
+.error-msg {
+  @apply pl-2 col-span-2 text-xl italic text-red-700;
+}
+
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
 }

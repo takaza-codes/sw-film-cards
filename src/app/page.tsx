@@ -3,16 +3,31 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Film } from "../../types";
 import { fetchFilms } from "./store/filmsData";
+import { loadSavedState } from "./store/slices/CardsSlice";
 import CustomCard from "@/components/CustomCard";
 import CustomButton from "@/components/CustomButton";
-import { AppDispatch } from "./store/store";
+import { AppDispatch, RootState } from "./store/store";
 
 export default function Home() {
   const dispatch = useDispatch<AppDispatch>();
-  const { cards, liked, error } = useSelector((state: any) => state.cards);
+  const { cards, liked, error } = useSelector(
+    (state: RootState) => state.cards
+  );
   const [showLikes, setShowLikes] = useState(false);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = sessionStorage.getItem("cardsState");
+        if (saved) {
+          const savedState = JSON.parse(saved);
+          dispatch(loadSavedState(savedState));
+        }
+      } catch (error) {
+        console.error("Failed to load saved state:", error);
+      }
+    }
+
     dispatch(fetchFilms());
   }, [dispatch]);
 
@@ -30,11 +45,11 @@ export default function Home() {
   };
 
   const films = showLikes
-    ? cards.filter((film: Film) => liked.includes(film.id))
+    ? cards.filter((film: Film) => liked.includes(film.id.toString()))
     : cards;
 
   return (
-    <main className="mt-10 mb-10 flex-1 flex flex-wrap flex-col content-center gap-6">
+    <main className="m-10 flex-1 flex flex-wrap flex-col content-center gap-6">
       <h1 className="pt-8 pb-8 text-center font-bold text-5xl lg:text-6xl">
         We proudly present our lore!
       </h1>
