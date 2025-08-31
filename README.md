@@ -8,6 +8,8 @@ A small web app to display information about all Star War films and each film in
 
 - **Adaptive design:** styled with TailwindCSS and Shadcn UI components
 - **Clickable cards:** to display additional information (via dynamic routes)
+- **Like and delete functionality:** with filtering
+- **Adding entries:** via submitting a form
 - **Error handlings and 404 page:** to ensure predictability
 
 ---
@@ -18,6 +20,10 @@ A small web app to display information about all Star War films and each film in
 - **TypeScript**
 - **TailwindCSS**
 - **Shadcn** UI library
+- **React Hook Forms**
 - **API** SWAPI
 
+---
+
 ## Deploy
+NB: As SWAPI is not currently reliably available in Russia, you may encounter a fetching error.
