@@ -25,5 +25,10 @@ A small web app to display information about all Star War films and each film in
 
 ---
 
-## Deploy
-NB: As SWAPI is not currently reliably available in Russia, you may encounter a fetching error.
+## Deployment
+<a href="https://sw-film-cards.vercel.app/">Go to app</a> </br>
+**NB**: As SWAPI is not currently reliably available in Russia, you may encounter a fetching error.
+
+In your directory, you can run
+npm i
+npm run dev
