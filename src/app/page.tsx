@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <main className="m-10 flex-1 flex flex-wrap flex-col content-center gap-6">
-      <h1 className="pt-8 pb-8 text-center font-bold text-2xl lg:text-5xl">
+      <h1 className="pt-8 pb-8 text-center font-bold text-3xl sm:text-4xl lg:text-5xl">
         We proudly present our lore!
       </h1>
       <p className="text-center text-sm mb-8 px-4">
@@ -62,7 +62,7 @@ export default function Home() {
       </p>
       <CustomButton
         onClick={toggleShowLikes}
-        className="custom-button w-30 h-10 mr-40 self-end">
+        className="custom-button w-30 h-10 mr-0 self-center sm:mr-30 sm:self-end">
         {showLikes ? "Show all" : "Show liked"}
       </CustomButton>
       <div className="flex justify-center flex-wrap gap-8 xs:flex-col">
