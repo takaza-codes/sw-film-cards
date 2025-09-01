@@ -20,28 +20,22 @@ export default function Navbar() {
         <NavigationMenu>
           <NavigationMenuList className="flex">
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-lg sm:text-xl">
-                <Link
-                  href="/"
-                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
+              <NavigationMenuLink asChild className="text-sm lg:text-xl">
+                <Link href="/" className="nav-link">
                   Main
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-lg sm:text-xl">
-                <Link
-                  href="/new-entry"
-                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
+              <NavigationMenuLink asChild className="text-sm lg:text-xl">
+                <Link href="/new-entry" className="nav-link">
                   Create a new entry
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className="text-lg sm:text-xl">
-                <Link
-                  href="/about"
-                  className="text-stone-800 font-bold hover:text-violet-600 transition-colors">
+              <NavigationMenuLink asChild className="text-sm lg:text-xl">
+                <Link href="/about" className="nav-link">
                   Contact us
                 </Link>
               </NavigationMenuLink>
